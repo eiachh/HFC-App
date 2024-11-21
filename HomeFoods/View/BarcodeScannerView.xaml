@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             x:Class="HomeFoods.View.BarcodeScannerView"
+             xmlns:model="clr-namespace:HomeFoods.Model"
+             xmlns:viewmodel="clr-namespace:HomeFoods.ViewModel"
+             Appearing="ContentPage_Appearing"
+             Disappearing="ContentPage_Disappearing"
+             x:DataType="viewmodel:BarcodeScannerViewModel"
+             Title="BarcodeScannerView">
+    <Grid RowDefinitions="0.65*, 0.07*, 0.25*">
+        <!-- Split the screen into two rows: 75% for the list, 25% for the camera -->
+        <ScrollView Grid.Row="0">
+            <ListView ItemsSource="{Binding ScanWithImgSource}"
+                      RowHeight="400">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnDefinitions="0.55*, 0.35*, 0.1*"
+                                  x:DataType="viewmodel:ScanItem">
+                                <Image Grid.Column="0"
+                                       Source="{Binding ImageSource}"
+                                       Aspect="AspectFit" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding Barcode}"
+                                       VerticalOptions="Center"
+                                       Margin="10,0,0,0" />
+                                <Button x:DataType="viewmodel:BarcodeScannerViewModel"
+                                        Command="{Binding RemoveItemCommand, Source={RelativeSource AncestorType={x:Type viewmodel:BarcodeScannerViewModel}}}"
+                                        Text="X"
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        Grid.Column="2"
+                                        CommandParameter="{Binding .}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <Button Text="Save"
+                Command="{Binding AddProdsToHomeStorageCommand}"
+                Grid.Row="1"
+                Margin="5,5,5,5"/>
+        <!-- CameraView positioned at the bottom 25% of the screen -->
+        <cv:CameraView Grid.Row="2"
+                       x:Name="cameraView"
+                       AutoSnapShotAsImageSource="True"
+                       VerticalOptions="End"
+                       CamerasLoaded="cameraView_CamerasLoaded"
+                       BarCodeDetectionEnabled="True"
+                       BarcodeDetected="cameraView_BarcodeDetected" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="HomeFoods.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:HomeFoods.View"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="True"
+    Shell.TabBarBackgroundColor="{StaticResource HFAppItemBG}"
+    FlyoutBackground="{StaticResource HFAppBG}"
+    
+    Title="HomeFoods"
+    Shell.BackgroundColor="{StaticResource HFAppItemBG}">
+
+    <Shell.TitleView>
+        <Grid BackgroundColor="{StaticResource HFAppItemBG}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="title"
+                   HorizontalOptions="Center"
+                   Grid.Column="0"
+                   FontAttributes="Bold"
+                   FontSize="25"
+                   TextColor="{StaticResource HFAppHighlightDark}"
+                   VerticalTextAlignment="Center" 
+                   Text="Home Foods"/>
+            <!--should be a home icon-->
+            <Button Text="Home"
+                    Grid.Column="1"
+                    Clicked="Button_Clicked"
+                    BackgroundColor="{StaticResource HFAppHighlightDark}"
+                    HorizontalOptions="End" />
+        </Grid>
+    </Shell.TitleView>
+    <FlyoutItem Title="IDK title"    
+                
+                FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:HomeStorageView}"
+        Route="HomeStorageView" 
+            />
+
+        <ShellContent Title="RevItemList"
+                      ContentTemplate="{DataTemplate local:RevItemListView}"
+                      Route="RevItemListView" />
+        <ShellContent Title="Barcode Scanner"
+                      ContentTemplate="{DataTemplate local:BarcodeScannerView}"
+                      Route="BarcodeScannerView" />
+    </FlyoutItem>
+</Shell>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      RowDefinitions="Auto"
+      x:Name="this"
+      x:Class="HomeFoods.CustomControls.OutlinedEntryControl"
+      Margin="0,0,0,15">
+    <Frame Grid.Row="0"
+           Padding="8,2,8,2"
+           BorderColor="Gray"
+           BackgroundColor="{StaticResource HFAppBG}">
+    </Frame>
+    <Entry x:Name="txtEntry"
+                              Focused="txtEntry_Focused"
+                              Unfocused="txtEntry_Unfocused"
+                              Loaded="txtEntry_Loaded"
+                              Text="{Binding Source={x:Reference this},Path=Text}" />
+
+    <Label Grid.Row="0"
+           FontSize="15"
+           x:Name="lblPlaceholder"
+           Margin="10,0,10,0"
+           TextColor="{StaticResource HFAppHighlightDark}"
+           Text="{Binding Source={x:Reference this},Path=Placeholder}"
+           BackgroundColor="{StaticResource HFAppBG}"
+           HorizontalOptions="StartAndExpand"
+           VerticalOptions="CenterAndExpand" />
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+    </Grid.GestureRecognizers>
+</Grid>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeFoods.View.HomeStorageView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:HomeFoods.Model"
+             xmlns:viewmodel="clr-namespace:HomeFoods.ViewModel"
+             Title="HomeStorageView"
+             Appearing="ContentPage_Appearing">
+    <VerticalStackLayout BackgroundColor="{StaticResource HFAppBG}">
+        <ListView ItemsSource="{Binding HomeStorage}"
+                  RowHeight="150"
+                  ItemTapped="OnItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10"
+                              BackgroundColor="{StaticResource HFAppBG}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="dotnet_bot.png"
+                                   Aspect="AspectFit"
+                                   WidthRequest="75"
+                                   Grid.Column="0" />
+
+                            <Label Text="{Binding Value[0].Product.DisplayName}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0,0,0"
+                                   Grid.Column="1"
+                                   FontAttributes="Bold" />
+
+                            <Label Text="{Binding Value.Count, StringFormat='{0}'}"
+                                   VerticalOptions="Center"
+                                   Margin="10,0,0,0"
+                                   Padding="0,0,15,0"
+                                   Grid.Column="2"
+                                   FontSize="22"
+                                   FontAttributes="Bold" />
+                            <StackLayout Orientation="Vertical"
+                                         Padding="0,2,2,2"
+                                         Grid.Column="3"
+                                         VerticalOptions="Center">
+                                <Button Text="+"
+                                        HeightRequest="50"
+                                        WidthRequest="50"
+                                        Margin="0,5,3,5"
+                                        VerticalOptions="Center"
+                                        FontSize="25"
+                                        FontAttributes="Bold"></Button>
+                                <Button Text="--"
+                                        HeightRequest="50"
+                                        WidthRequest="50"
+                                        Margin="0,3,5,5"
+                                        VerticalOptions="Center"
+                                        FontSize="25"
+                                        FontAttributes="Bold"></Button>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

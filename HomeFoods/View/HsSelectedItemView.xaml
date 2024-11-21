@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeFoods.View.HsSelectedItemView"
+             xmlns:model="clr-namespace:HomeFoods.Model"
+             xmlns:viewmodel="clr-namespace:HomeFoods.ViewModel"
+             Title="HsSelectedItemaaaa">
+
+    <VerticalStackLayout BackgroundColor="{StaticResource HFAppBG}">
+        <Label Text="{Binding Items[0].Product.DisplayName}"
+               HeightRequest="75"
+               Background="{StaticResource HFAppItemBG}"
+               FontSize="22"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center" 
+               Margin="0,0,0,0"/>
+        <ListView ItemsSource="{Binding Items}"
+                  RowHeight="85"
+                  ItemTapped="ListView_ItemTapped"
+                  BackgroundColor="{StaticResource HFAppBG}" Margin="0">
+                    
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Border Stroke="{StaticResource HFAppHighlightDark}"
+                                StrokeThickness="2"
+                                Padding="0,0,0,0">
+                            <VerticalStackLayout Grid.Column="0"
+                                             VerticalOptions="Center"
+                                             BackgroundColor="{StaticResource HFAppBG}"
+                                             Margin="0"
+                                             Padding="0,0,0,15">
+
+                            <Grid Padding="7"
+                                  HeightRequest="50"
+                                  BackgroundColor="{StaticResource HFAppBG}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding ExpiresIn, StringFormat='Expires in: {0}'}"
+                                       VerticalOptions="Center"
+                                       FontAttributes="Bold"
+                                       FontSize="20"
+                                       Grid.Column="0" />
+
+                                <Label Text="{Binding Expires,StringFormat='{0:yyyy/MM/dd}'}"
+                                       VerticalOptions="Center"
+                                       Margin="10,0,0,0"
+                                       Grid.Column="1"
+                                       FontAttributes="Bold" />
+
+                                <Button Text="--"
+                                        BackgroundColor="{StaticResource HFAppHighlightDark}"
+                                        HeightRequest="50"
+                                        WidthRequest="50"
+                                        Margin="0,3,5,5"
+                                        VerticalOptions="Center"
+                                        FontSize="25"
+                                        FontAttributes="Bold"
+                                        Grid.Column="2"
+                                        x:DataType="viewmodel:HsSelectedItemViewModel"
+                                        Command="{Binding Path=BindingContext.RemoveItemCommand, Source={RelativeSource AncestorType={x:Type ListView}}}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid>
+
+                            <ProgressBar Progress="{Binding ExpireProgress}"
+                                         ProgressColor="{Binding ExpireColor}" 
+                                         FlowDirection="RightToLeft" Margin="0,0,0,0" HeightRequest="30"                                      
+                                         ScaleY="3"/>
+
+                        </VerticalStackLayout>
+                        </Border>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </VerticalStackLayout>
+</ContentPage>

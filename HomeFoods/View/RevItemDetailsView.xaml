@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeFoods.View.RevItemDetailsView"
+             xmlns:customControls="clr-namespace:HomeFoods.CustomControls"
+             xmlns:model="clr-namespace:HomeFoods.Model"
+             xmlns:viewmodel="clr-namespace:HomeFoods.ViewModel"
+             x:DataType="viewmodel:RevItemDetailsViewModel"
+             Title="RevItemDetailsView"
+             Appearing="ContentPage_Appearing">
+
+    <ScrollView Orientation="Vertical"
+                BackgroundColor="{StaticResource HFAppItemBG}">
+        <VerticalStackLayout x:Name="ParentContainer"
+                             Padding="10,10,10,0"
+                             WidthRequest="420">
+            <Image Grid.Column="0"
+                   Rotation="90"
+                   Source="{Binding ImageSource}"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Center"
+                   HeightRequest="400" 
+                   Margin="0,-50,0,-35"/>
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 BackgroundColor="{StaticResource HFAppItemBG}"
+                                 Padding="10,10,10,0"
+                                 WidthRequest="420">
+                <customControls:OutlinedEntryControl  Placeholder="Code"
+                                                      Padding="0,-10,0,0"
+                                                      Text="{Binding RevItem.Code}" />
+                <customControls:OutlinedEntryControl Placeholder="Brands"
+                                                     Text="{Binding RevItem.Brands}" />
+                <customControls:OutlinedEntryControl  Placeholder="ProductName"
+                                                      Text="{Binding RevItem.ProductName}" />
+                <customControls:OutlinedEntryControl  Placeholder="DisplayName"
+                                                      Text="{Binding RevItem.DisplayName}" />
+                <customControls:OutlinedEntryControl  Placeholder="ExpireAverage"
+                                                      Text="{Binding RevItem.ExpireAverage}" />
+                <customControls:OutlinedEntryControl  Placeholder="MeasurementUnit"
+                                                      Text="{Binding RevItem.MeasurementUnit}" />
+            </VerticalStackLayout>
+            <customControls:OutlinedEntryControl  Placeholder="Product Category"
+                                                  Text="{Binding RevItem.CatHAsStrTMP}" />
+
+            <Button Text="Save"
+                WidthRequest="400"
+                x:DataType="viewmodel:RevItemDetailsViewModel"
+                BackgroundColor="CadetBlue"
+                Command="{Binding SaveChangesCommand}"
+                CommandParameter="{Binding RevItem}" />
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomeFoods.View.RevItemListView"
+             xmlns:model="clr-namespace:HomeFoods.Model"
+             xmlns:viewmodel="clr-namespace:HomeFoods.ViewModel"
+             Appearing="ContentPage_Appearing"
+             x:DataType="viewmodel:RevItemListViewModel"
+             Title="RevItemListView">
+    <ListView ItemsSource="{Binding UnreviewedItems}"
+              RowHeight="150"
+              ItemTapped="ListView_ItemTapped"
+              BackgroundColor="{StaticResource HFAppBG}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell x:DataType="model:Product">
+                    <Grid Padding="10"
+                          BackgroundColor="{StaticResource HFAppBG}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="dotnet_bot.png"
+                               Aspect="AspectFit"
+                               WidthRequest="75"
+                               Grid.Column="0" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="{Binding Code}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Margin="10,0,0,0"
+                                   FontAttributes="Bold" />
+
+                            <Label Text="{Binding DisplayName}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Margin="10,0,0,0"
+                                   Padding="0,0,15,0"
+                                   FontSize="15"
+                                   FontAttributes="Bold" />
+                        </VerticalStackLayout>
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
